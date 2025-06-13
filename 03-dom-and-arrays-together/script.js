@@ -9,8 +9,60 @@ const products = [
 
 // Easy
 
+const productList = document.querySelector('#product-list')
+
+const productItems = products.map(product => `<li>${product.name}</li>`)
+
+productList.innerHTML = productItems.join("")
+
 
 // Medium
 
+// const productList = document.querySelector('#product-list')
+
+const inStockProducts = products.filter(product => product.inStock)
+
+const product_Items = inStockProducts.map(product => `
+    <li class = "product-item">
+    <h3>${product.name}</h3>
+    <p>$${product.price}</p>
+    </li>
+`)
+
+productList.innerHTML = product_Items.join("")
 
 // Hard
+
+// const productList = document.querySelector('#product-list')
+
+productList.innerHTML = ""
+
+products.forEach(product => {
+    const li = document.createElement("li")
+
+    const h3 = document.createElement("h3")
+    h3.textContent = product.name
+
+    const p = document.createElement("p")
+    p.textContent = `$${product.price}`
+
+    li.appendChild(h3)
+    li.appendChild(p)
+
+    if(!product.inStock) {
+        li.classList.add("out-of-stock")
+    }
+
+    li.classList.add(`category-${product.category.toLowerCase()}`)
+    li.classList.add("product-item")
+
+    productList.appendChild(li)
+})
+
+const totalValueInStock = products.reduce((total, product) => {
+    return product.inStock ? total + product.price : total;
+}, 0)
+
+const totalDiv = document.createElement("div")
+totalDiv.textContent = `Total Value of In-Stock Items: $${totalValueInStock}`
+document.body.appendChild(totalDiv)
