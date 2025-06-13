@@ -7,6 +7,11 @@ const products = [
     { id: 6, name: "Smart Watch", category: "Electronics", price: 250, inStock: true },
 ];
 
+
+const footerLine = document.querySelector('footer p')
+footerLine.innerHTML = "&copy; 2025 Keerthi Kelam"
+
+
 // Easy
 
 const productList = document.querySelector('#product-list')
